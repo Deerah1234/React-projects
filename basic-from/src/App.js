@@ -22,10 +22,17 @@ function App() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (formData.firstName && formData.lastName && formData.emailAddress) {
+        
+        if (
+            formData.firstName &&
+            formData.lastName && 
+            formData.emailAddress
+        ) {
             setValid((prevState) => !prevState);
         }
+        
         setIsSubmitted(true);
+        
         console.info(
             `First name: ${formData.firstName}
             Last name: ${formData.lastName}
