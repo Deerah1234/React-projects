@@ -37,6 +37,15 @@ main > p {
     font-size: 20px;
     font-weight: 500;
     color: #414141;
+    position: relative;
+}
+
+main > .won-message::before {
+    content: "Start new game ➡️";
+    max-width: 7rem;
+    position: absolute;
+    left: -11rem;
+    bottom: -21.4rem;
 }
 
 main > button {

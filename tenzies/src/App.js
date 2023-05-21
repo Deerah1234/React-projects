@@ -64,21 +64,18 @@ function App() {
         }
     };
 
-    const confettiExplosion = new ConfettiExplosion({
-        duration: 5000,
-        particleCount: 250,
-        width: 1600,
-        repeat: true,
-    });
-
     return (
         <main>
-            {tenzies && <ConfettiExplosion ref={confettiExplosion} />}
+            {tenzies && <ConfettiExplosion />}
             <h2>Tenzies</h2>
-            <p>
-                Roll until all dice are the same. Click each die to freeze it at
-                its current value between rolls.
-            </p>
+            {tenzies ? (
+                <p className="won-message">You've Won!! 🎉</p>
+            ) : (
+                <p>
+                    Roll until all dice are the same. Click each die to freeze
+                    it at its current value between rolls.
+                </p>
+            )}
             <div className="die-container">{diceElements}</div>
             <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
         </main>
