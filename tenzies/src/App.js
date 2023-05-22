@@ -9,6 +9,11 @@ function App() {
     const [dice, setDice] = useState(allNewArray());
     const [tenzies, setTenzies] = useState(false);
     const [rollCount, setRollCount] = useState(0);
+    const [timer, setTimer] = useState({
+        sec: 0,
+        min: 0,
+    });
+    const [isRunning, setIsRunning] = useState(true);
 
     useEffect(() => {
         const allHeld = dice.every((die) => die.isHeld);
@@ -19,6 +24,28 @@ function App() {
             setTenzies(true);
         }
     }, [dice]);
+
+    useEffect(() => {
+        // let interval = null;
+        if (isRunning) {
+            const interval = setInterval(() => {
+                // Update the timer state
+                setTimer((prevTimer) => {
+                    const newSec = prevTimer.sec + 1;
+                    const newMin = prevTimer.min + Math.floor(newSec / 60);
+                    return {
+                        sec: newSec % 60,
+                        min: newMin,
+                    };
+                });
+            }, 1000); // Run the interval every second (1000 milliseconds)
+
+            // Clean up the interval when the component unmounts
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [isRunning]);
 
     function generateNewDice() {
         return {
@@ -56,21 +83,32 @@ function App() {
     });
 
     const rollDice = () => {
+        if (isRunning) {
+            setIsRunning(false);
+        }
         if (!tenzies) {
             setDice((oldDice) =>
                 oldDice.map((die) => (die.isHeld ? die : generateNewDice()))
             );
-            setRollCount((oldDice) => oldDice + 1);
+            // setRollCount((oldDice) => oldDice + 1);
         } else {
             setTenzies(false);
             setDice(allNewArray());
             setRollCount(0);
+            setTimer({ sec: 0, min: 0 });
         }
+        setRollCount((oldCount) => oldCount + 1);
     };
 
     return (
         <main>
             {tenzies && <ConfettiExplosion />}
+            <div className="timer--container">
+                <div className="timer">
+                <span>{timer.min.toString().padStart(2, "0")}:</span>
+                <span>{timer.sec.toString().padStart(2, "0")}</span>
+                </div>
+            </div>
             <h2>Tenzies</h2>
             {tenzies ? (
                 <section>

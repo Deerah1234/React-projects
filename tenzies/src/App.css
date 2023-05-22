@@ -76,6 +76,23 @@ main > .roll-count {
     background-color: #0f1e2a;
 }
 
+.timer--container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 30px;
+    font-size: 25px;
+    /* background-color: #26a641; */
+}
+
+.timer {
+    padding: 10px;
+    background-color: #0f1e2a;
+    border-radius: 20px;
+    color: #26a641;
+}
+
 
 .die-container {
     display: grid;
