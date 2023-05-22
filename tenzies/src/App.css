@@ -31,7 +31,9 @@ main > h2 {
     margin: 0;
 }
 
-main > p {
+main > p,
+.message,
+.message-stats {
     max-width: 23rem;
     text-align: center;
     font-size: 20px;
@@ -40,13 +42,9 @@ main > p {
     position: relative;
 }
 
-main > .won-message::before {
-    content: "Start new game ➡️";
-    max-width: 7rem;
-    position: absolute;
-    left: -11rem;
-    bottom: -21.4rem;
-}
+/* main > .message-stats {
+    font-weight: 700;
+} */
 
 main > button {
     padding: 20px 70px;
@@ -66,6 +64,19 @@ main > button:active {
     animation-duration: 0.5s;
 }
 
+main > .roll-count {
+    width: 70px;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #26a641;
+    border-radius: 70px;
+    background-color: #0f1e2a;
+}
+
+
 .die-container {
     display: grid;
     grid-template: auto auto / repeat(5, 1fr);
@@ -81,7 +92,6 @@ main > button:active {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     cursor: pointer;
-    background-color: white;
 }
 
 .dice--face:active {
@@ -89,9 +99,15 @@ main > button:active {
     animation-duration: 0.5s;
 }
 
-.dice--face > h2 {
+.die-num {
     font-size: 2rem;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.die-num > i {
+    font-size: 5.5rem;
 }
 
 @keyframes bounce {

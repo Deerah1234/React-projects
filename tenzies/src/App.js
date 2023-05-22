@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+// import '@fortawesome/fontawesome-free/css/all.css';
 import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
 import ConfettiExplosion from "react-confetti-explosion";
@@ -7,6 +8,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 function App() {
     const [dice, setDice] = useState(allNewArray());
     const [tenzies, setTenzies] = useState(false);
+    const [rollCount, setRollCount] = useState(0);
 
     useEffect(() => {
         const allHeld = dice.every((die) => die.isHeld);
@@ -58,9 +60,11 @@ function App() {
             setDice((oldDice) =>
                 oldDice.map((die) => (die.isHeld ? die : generateNewDice()))
             );
+            setRollCount((oldDice) => oldDice + 1);
         } else {
             setTenzies(false);
             setDice(allNewArray());
+            setRollCount(0);
         }
     };
 
@@ -69,7 +73,10 @@ function App() {
             {tenzies && <ConfettiExplosion />}
             <h2>Tenzies</h2>
             {tenzies ? (
-                <p className="won-message">You've Won!! 🎉</p>
+                <section>
+                    <p className="message">You've Won!! 🎉</p>
+                    <p className="message-stats">Total Rolls: {rollCount}</p>
+                </section>
             ) : (
                 <p>
                     Roll until all dice are the same. Click each die to freeze
@@ -78,6 +85,7 @@ function App() {
             )}
             <div className="die-container">{diceElements}</div>
             <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+            <p className="roll-count">{rollCount}</p>
         </main>
     );
 }
