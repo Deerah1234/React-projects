@@ -5,19 +5,19 @@ const Dice = (props) => {
         backgroundColor: props.isHeld ? "white" : "black",
     };
     const [diceNumber, setDiceNumber] = useState("");
-    
-    // NOte: You can also use if statement
-    useEffect(() => {
-    const diceNumberMapping = {
-      1: 'one',
-      2: 'two',
-      3: 'three',
-      4: 'four',
-      5: 'five',
-      6: 'six'
-    };
 
-    setDiceNumber(diceNumberMapping[props.value] || '');
+    //NOTE - You can also use if statement as well.
+    useEffect(() => {
+        const diceNumberMapping = {
+            1: "one",
+            2: "two",
+            3: "three",
+            4: "four",
+            5: "five",
+            6: "six",
+        };
+
+        setDiceNumber(diceNumberMapping[props.value] || "");
     }, [props.value]);
 
     return (
@@ -26,7 +26,7 @@ const Dice = (props) => {
                 <i
                     className={`fas fa-dice-${diceNumber}`}
                     style={{
-                        color: props.isHeld ? "#26a641" : "white"
+                        color: props.isHeld ? "#26a641" : "white",
                     }}
                 ></i>
             </h2>
