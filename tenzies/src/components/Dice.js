@@ -5,21 +5,19 @@ const Dice = (props) => {
         backgroundColor: props.isHeld ? "white" : "black",
     };
     const [diceNumber, setDiceNumber] = useState("");
-
+    
+    // NOte: You can also use if statement
     useEffect(() => {
-        if (props.value === 1) {
-            setDiceNumber("one");
-        } else if (props.value === 2) {
-            setDiceNumber("two");
-        } else if (props.value === 3) {
-            setDiceNumber("three");
-        } else if (props.value === 4) {
-            setDiceNumber("four");
-        } else if (props.value === 5) {
-            setDiceNumber("five");
-        } else if (props.value === 6) {
-            setDiceNumber("six");
-        }
+    const diceNumberMapping = {
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six'
+    };
+
+    setDiceNumber(diceNumberMapping[props.value] || '');
     }, [props.value]);
 
     return (
